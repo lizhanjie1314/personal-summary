@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link href="css/bootstrap.min.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <button class="btn btn-info" id="btn">35选7</button>
+        <h3 id="btnStr"></h3>
+    </div>
+</div>
+<script src="js/jquery-2.0.3.min.js"></script>
+<script>
+    $(function(){
+        var count=1;
+        $("#btn").on("click",function(){
+            var numArr=[];
+            for(var i=0;i<35;i++){
+                numArr.push(i+1)
+            }
+            var numStr=numFind(numArr,7);
+            $("#btnStr").html(numStr);
+            history.pushState(numStr,'11',count++)
+
+        });
+        window.onpopstate=function(ev){
+            var num=ev.state||'';
+            $("#btnStr").html(num);
+        };
+        function numFind(numArr,len){
+            var resArr=[];
+            var num="";
+            for(i=0;i<len;i++){
+                num =numArr[Math.floor(Math.random()*(numArr.length))];
+                resArr.push(num);
+            }
+            return resArr.toString();
+
+
+        }
+    })
+</script>
+</body>
+</html>
