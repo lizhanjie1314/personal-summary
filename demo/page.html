@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .pagination {margin-top: 20px;}
+        #page a.pageInfo{height: 75px; line-height: 75px; color: #666; cursor: default;}
+        #page a.pageInfo strong{color: red;}
+        .pagination {display: inline-block; border: 1px solid #CDCDCD; border-radius: 3px; margin-top: 23px; }
+
+        .pagination a {
+            display: block;
+            float: left;
+            width: 30px;
+            height: 30px;
+            outline: none;
+            border-right: 1px solid #CDCDCD;
+            border-left: 1px solid #CDCDCD;
+            color: #555555;
+            vertical-align: middle;
+            text-align: center;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 16px;
+            font-family: Times, 'Times New Roman', Georgia, Palatino;
+            /* ATTN: need a better font stack */
+            background-color: #2dc3e8;
+            background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #f3f3f3), color-stop(100%, lightgrey));
+            background-image: -webkit-linear-gradient(#f3f3f3, lightgrey);
+            background-image: linear-gradient(#f3f3f3, lightgrey); }
+        .pagination a:hover, .pagination a:focus, .pagination a:active {
+            background-color: #cecece;
+            background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #e4e4e4), color-stop(100%, #cecece));
+            background-image: -webkit-linear-gradient(#e4e4e4, #cecece);
+            background-image: linear-gradient(#e4e4e4, #cecece); }
+        .pagination a.disabled, .pagination a.disabled:hover, .pagination a.disabled:focus, .pagination a.disabled:active {
+            background-color: #f3f3f3;
+            background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #f3f3f3), color-stop(100%, lightgrey));
+            background-image: -webkit-linear-gradient(#f3f3f3, lightgrey);
+            background-image: linear-gradient(#f3f3f3, lightgrey);
+            color: #A8A8A8;
+            cursor: default; }
+
+        .pagination a:first-child {border: none; border-radius: 2px 0 0 2px;}
+        .pagination a:last-child {border: none; border-radius: 0 2px 2px 0; }
+
+        .pagination input {float: left; margin: 0; padding: 0; width: 120px;height: 30px; outline: none; border: none;
+            vertical-align: middle; text-align: center; }
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <div id="page"> <!--分页-->
+        <div class="row">
+            <div class="col-sm-5 text-right">
+                <a class="pageInfo" href="javascript:;">
+                    共<strong> <span id="totalSize">0</span></strong> 条 ,
+                    当前第<strong> <span id="pageIndex">1</span>/<span id="totalPage">1</span> </strong>页
+                </a>
+            </div>
+            <div class="col-sm-7 text-left" id="showPage"></div>
+        </div>
+    </div>
+</div>
+
+<script src="assets/js/lib/jquery-2.0.3.min.js"></script>
+<script src="assets/js/lib/jquery.jqpagination.min.js"></script>
+<script>
+    var pageIndex=10;
+    $("#totalSize").text(10);
+    var pageTotal=Math.ceil(10/10);
+    if(pageTotal == 0){pageTotal = 1;}
+    $("#totalPage").text(pageTotal);
+    $("#showPage").html("");
+    var content = '<div class="pagination"><a href="#" class="first" data-action="first">&laquo;</a>'+
+            '<a href="#" class="previous" data-action="previous">&lsaquo;</a>'+
+            '<input type="text" readonly="readonly" data-max-page="1" />'+
+            '<a href="#" class="next" data-action="next">&rsaquo;</a>'+
+            '<a href="#" class="last" data-action="last">&raquo;</a></div>';
+    $('#showPage').html(content);
+
+    var $page = $('#showPage').find(".pagination");
+    $page.jqPagination({
+        current_page : pageIndex,
+        max_page : pageTotal,
+        paged: function(page) {
+            if (page != pageIndex) {
+                pageIndex = page;
+                onLoadData();
+            }
+        }
+    });
+
+</script>
+</body>
+</html>

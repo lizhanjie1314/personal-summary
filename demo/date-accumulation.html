@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>日期的累加</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap-datepicker.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="col-md-2">
+    <div class="form-group">
+        <label class="control-label">开始日期:</label>
+        <span class="input-icon icon-left">
+            <input class="form-control date-picker" type="text" id="dataPicker" data-date-format="yyyy/mm/dd">
+        </span>
+    </div>
+</div>
+<div class="col-md-2">
+    <div class="form-group">
+        <label class="control-label">期限(天):</label>
+        <input type="text" class="form-control" id="daysLimit"  placeholder="" maxlength="30">
+    </div>
+</div>
+<div class="col-md-2">
+    <div class="form-group">
+        <label class="control-label">到期日期:</label>
+        <input type="text" class="form-control" id="loanendTime" placeholder="" disabled>
+    </div>
+</div>
+<script src="js/jquery-2.0.3.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/bootstrap-datepicker.min.js"></script>
+<script src="js/bootstrap-datepicker.zh-CN.min.js"></script>
+<script>
+    //初始化时间插件
+    $('.date-picker').datepicker({
+        clearBtn: true,
+        language: "zh-CN",
+        autoclose: true,
+        todayHighlight: true,
+        orientation: "bottom auto"
+    });
+    //授信到期日自动计算
+    var reg0_999=/^(?:[1-9]\d{0,2}|0)?$/;//0-999的整数
+    $('#daysLimit').blur(function() {
+        var beginTimeVal=$('#dataPicker').val(),//获取页面中的开始时间val（），格式为2017/01/11类型
+                date='"'+beginTimeVal+'"',//拼接字符串 ps:如果不拼接会被当做减法运算，传入的结果就为2005
+                days=$(this).val(),//获取页面中的期限（天）val（）
+                daysInt=parseInt(days);//强制转换为int类型 ps:不转换不会报错但是时间不准确
+        if(beginTimeVal&&days&&reg0_999.test(days)){
+            var val=addDate(date,daysInt);//调用已经封装好的函数addDate
+            $('#loanendTime').val(val);
+        }
+        else{
+            $('#loanendTime').val("");
+        }
+    });
+    $('#dataPicker').on("changeDate",function() {//日期插件要绑定changeDate事件，这样里面的值发生改变的时候，累加结果会相应的变化
+        var beginTimeVal=$(this).val(),
+                date='"'+beginTimeVal+'"',
+                days=$('#daysLimit').val(),
+                daysInt=parseInt(days);
+        if(beginTimeVal&&days&&reg0_999.test(days)){
+            var val=addDate(date,daysInt);
+            $('#loanendTime').val(val);
+        }
+        else{
+            $('#loanendTime').val("");
+        }
+    });
+    //格式:addDate('2017-1-11',20)
+    function addDate(date,days){
+        var d=new Date(date);//获取日期格式
+        d.setDate(d.getDate()+days);//对日期进行累加
+        var m=d.getMonth()+1;//获取月份，获取到的比实际的小1，所以要加1
+        m=m<10?'0'+m:m;//如果月份不足10，月份前面要加0
+        return d.getFullYear()+'/'+m+'/'+(d.getDate()<10?'0'+d.getDate():d.getDate()); //返回按日期格式拼接的字符串
+    }
+</script>
+</body>
+</html>
