@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>radio</title>
+</head>
+<body>
+<div id="box">
+    <label>爱好：</label><input type="radio" name="type" class="blue age" value="1" checked><input type="radio" class="blue age" name="type" value="2">
+</div>
+
+<script src="js/jquery-2.0.3.min.js"></script>
+<script>
+    $(function () {
+        $('input[name="type"][class="blue age"]').prop('checked',false);
+        $('input[name="type"][class="blue age"][value="2"]').prop('checked',true);//对radio属性进行赋值
+        console.log($('input[name="type"][class="blue age"]:checked').val()) //获取选中的radio的值
+    })
+</script>
+</body>
+</html>
