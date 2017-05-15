@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CSS3返回顶部</title>
+    <style>
+        body,html,div{margin: 0;padding: 0;}
+        .box{height: 3000px;background: #dddddd;position: relative;}
+         /*-webkit-animation-name:'ripple';!*动画属性名，也就是我们前面keyframes定义的动画名*!*/
+        /*-webkit-animation-duration: 2s;!*动画持续时间*!*/
+        /*-webkit-animation-timing-function: ease; !*动画频率，和transition-timing-function是一样的*!*/
+        /*-webkit-animation-delay: 0s;!*动画延迟时间*!*/
+        /*-webkit-animation-iteration-count: infinite;!*定义循环资料，infinite为无限次*!*/
+        /*-webkit-animation-direction: alternate;!*定义动画方式*!*/
+        .backTop{position: fixed;bottom: 50px;right: 50px;background: #58b7ff;height: 50px;width: 50px;border-radius: 50%;opacity: 0.5;
+            animation:ripple 2s ease 0s infinite alternate;
+            -moz-animation:ripple 2s ease 0s infinite alternate;/* Firefox: */
+            -webkit-animation:ripple 2s ease 0s infinite alternate;/* Safari 和 Chrome: */
+            -o-animation:ripple 2s ease 0s infinite alternate;/* Opera: */
+           }
+        .backTop:hover{opacity: 1; }
+        .triangle{width: 0px;height: 0px;margin: 10px 0 0 15px;border: 10px solid transparent; border-bottom: 10px solid #ffffff;;}
+        @keyframes ripple {
+            0% {
+                -webkit-transform:scale(1.2) rotate(0deg);
+                -moz-transform:scale(1.2) rotate(0deg);
+                -o-transform:scale(1.2) rotate(0deg);
+            }
+            100% {
+                -webkit-transform:scale(1) rotate(0deg);
+                -moz-transform:scale(1) rotate(0deg);
+                -o-transform:scale(1) rotate(0deg);
+            }
+        }
+        @-moz-keyframes ripple {/* Firefox: */
+            0% {
+                -webkit-transform:scale(1.2) rotate(0deg);
+                -moz-transform:scale(1.2) rotate(0deg);
+                -o-transform:scale(1.2) rotate(0deg);
+            }
+            100% {
+                -webkit-transform:scale(1) rotate(0deg);
+                -moz-transform:scale(1) rotate(0deg);
+                -o-transform:scale(1) rotate(0deg);
+            }
+        }
+        @-webkit-keyframes ripple {/* Safari 和 Chrome: */
+            0% {
+                -webkit-transform:scale(1.2) rotate(0deg);
+                -moz-transform:scale(1.2) rotate(0deg);
+                -o-transform:scale(1.2) rotate(0deg);
+            }
+            100% {
+                -webkit-transform:scale(1) rotate(0deg);
+                -moz-transform:scale(1) rotate(0deg);
+                -o-transform:scale(1) rotate(0deg);
+            }
+        }
+        @-o-keyframes ripple {/* Opera: */
+            0% {
+                -webkit-transform:scale(1.2) rotate(0deg);
+                -moz-transform:scale(1.2) rotate(0deg);
+                -o-transform:scale(1.2) rotate(0deg);
+            }
+            100% {
+                -webkit-transform:scale(1) rotate(0deg);
+                -moz-transform:scale(1) rotate(0deg);
+                -o-transform:scale(1) rotate(0deg);
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="box">
+   <div class="backTop">
+       <div class="triangle"></div>
+   </div>
+</div>
+<script src="js/jquery-2.0.3.min.js"></script>
+<script>
+$('.backTop').on('click',function () {
+    $('body,html').animate({scrollTop:0},500);
+})
+</script>
+</body>
+</html>
