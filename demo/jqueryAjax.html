@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jqueryAjax</title>
+</head>
+<body>
+<script src="js/jquery-2.0.3.min.js"></script>
+<script>
+    $(function () {
+        $.ajax({
+            url:'1.php?name=li&age=18',
+            type:'GET',
+            dataType:'json',
+            contentType:'application/json;charset=utf-8',
+            success:function (data) {
+                console.log(data)
+            },
+            error:function (data) {
+                console.log(data);
+            }
+
+        })
+    })
+</script>
+</body>
+</html>
