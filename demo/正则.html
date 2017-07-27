@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>正则量词</title>
+    <style>
+        html,body,input div{ margin: 0;padding: 0;}
+        .box{ margin: 30px auto;width: 500px;}
+        input{ height: 30px;line-height: 30px;vertical-align: middle;}
+        .subBtn{height: 36px;line-height: 36px;}
+    </style>
+    <script>
+        window.onload=function () {
+            var oInput=document.getElementsByTagName("input");
+            var reg=/^[1-9]\d{4,11}$/;
+            var mail=/^\w+@[a-zA-z]+(\.[a-zA-Z]+){1,3}$/;
+            var reg_s=/^\s+|\s+$/g;
+            var str=" hello ";
+//            alert("("+trim(str)+")");
+//            去掉前后空格的
+            function trim(str) {
+                return str.replace(reg_s,"");
+
+            }
+//            校验是否为空邮箱的
+            oInput[1].onclick=function () {
+                if(mail.test(oInput[0].value)){
+                    alert("我是正确的Mail~");
+                }
+                else {
+                    alert("我是错误的Mail~");
+                }
+
+            };
+            //校验是否是QQ号码
+//            oInput[1].onclick=function () {
+//                if(reg.test(oInput[0].value)){
+//                    alert("我是正确的QQ~")
+//                }
+//                else {
+//                    alert("我是错误的QQ~")
+//                }
+//
+//            }
+
+        }
+    </script>
+</head>
+<body>
+<div class="box">
+    <input type="text"/><input type="button" value="确定" class="subBtn" />
+</div>
+<script>
+    var str="112233";
+    var reg=/(\d)\1/g;
+    console.log(reg.exec(str),56);
+    console.log(reg.exec(str),57);
+
+    var str1="ab1234555555";
+    var reg2=/(?:2345)+/;
+    var reg3=/(2345)+/;
+    console.log(str1.match(reg2),60);
+    console.log(reg3.exec(str1),61);
+    console.log(str1.match(reg3),62);
+    var newStr=str.replace(reg,function () {
+        console.log(arguments,66);
+        console.log("$1",67);
+        return arguments[1];
+    });
+    var newStr1=str.replace(reg,"$1");
+    console.log(newStr,68);
+    console.log(newStr1,72);
+
+</script>
+</body>
+</html>

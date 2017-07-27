@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>脱敏处理显示</title>
+</head>
+<body>
+<script>
+    /**
+     * 脱敏显示处理
+     * 2017.06.06
+     * @param str 处理的字符
+     * @param star 脱敏开始位置
+     * @param end  脱敏结束位置
+     * @returns {string} 处理过后的新字符
+     */
+    function  senHandle(str,star,end) {
+        //substring(start,stop) 包括start位置，不包括stop处
+        //1.senHandle(str,1) 邮箱，@符号 例如：15601361111@qq.com -->1**********@qq.com
+        // 2.senHandle(str,3,7) 手机号 例如：15601361111 -->156****1111
+        // 3.senHandle(str,4,str.length-4) 银行账户 例如：121912408010703 -->1219*******0703
+        // 4.senHandle(str,str.length-8,str.length-4)身份证号 例如130525201605056666
+        var end=end;
+        if(!end){end=str.indexOf('@');}
+        var starStr=str.substring(0,star);
+        var endStr=str.substring(end);
+        var midLen=end-star;
+        if(midLen>0){
+            var newMidStr='';
+            for(var i=0;i<midLen;i++){newMidStr+="*";}
+            return starStr+newMidStr+endStr
+        }
+    }
+    var str="130525201605056666";
+
+    console.log(senHandle(str,str.length-8,str.length-4))
+</script>
+</body>
+</html>

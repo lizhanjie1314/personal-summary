@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>移动端touch事件</title>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <style>
+        html,body,div{margin: 0;padding: 0;}
+        html,body{width: 100%;}
+        .box{ font-size: 0.28rem;width: 3rem;height: 2rem;margin: 0 auto;background: #dddddd;}
+    </style>
+    <script>
+        (function () {
+            var html=document.documentElement;
+            var winW=html.clientWidth;
+            html.style.fontSize=winW/750*100+"px";
+        })()
+    </script>
+</head>
+<body>
+<div id="box" class="box">
+我们的移动端
+</div>
+<script>
+    window.onload=function () {
+        var box=document.getElementById("box");
+        var startX=0,startY=0;
+        box.addEventListener("touchstart",function (e) {
+            var touch=e.changedTouches[0];
+            startX=Math.floor(touch.pageX);
+            startY=Math.floor(touch.pageY);
+            console.log(startX,startY);
+        }) ;
+        box.addEventListener("touchend",function (e) {
+            var touch=e.changedTouches[0];
+//            console.log(touch.pageX,touch.pageY);
+            if(Math.abs(touch.pageX-startX)<5&&Math.abs(touch.pageY-startY)<5){
+                return false;
+            }
+            else {
+                alert("我是滑动");
+            }
+        });
+    }
+</script>
+</body>
+</html>

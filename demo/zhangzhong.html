@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>练习</title>
+</head>
+<body>
+
+<script>
+//    1
+    var a=100;
+    function test1() {
+        alert(a);
+        a=10;
+        alert(a);
+    }
+//    test1();
+//    alert(a);
+    //2.
+    var b=100;
+    function test2() {
+        alert(b);
+        var b=10;
+        alert(b);
+    }
+//    test2();
+    //3.
+    var c=10;
+    function test3() {
+        c=100;
+        alert(c);
+        alert(this.c);
+        var c;
+        alert(c);
+    }
+//    test3();
+    function isArray(arr) {
+        if(arr instanceof Array){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+    var res=isArray(test3);
+    console.log(res,46);
+    function add() {
+        if(arguments.length>1){
+            return arguments[0]+arguments[1];
+        }
+        else {
+            var a=arguments[0];
+            return function () {
+                return a+arguments[0];
+            }
+        }
+    }
+    console.log(add(15,20),58);
+    console.log(add(15)(20),59);
+//    9.
+//    10.
+    function maxNum(arr) {
+        for (var i=0;i<arr.length-1;i++){
+            for (var j=0;j<arr.length-i-1;j++){
+                if(Number(arr[j].toString().substring(0,1))<Number(arr[j+1].toString().substring(0,1))){
+                    var num=arr[j];
+                    arr[j]=arr[j+1];
+                    arr[j+1]=num;
+                }
+            }
+        }
+        return arr.join("");
+    }
+    console.log(maxNum([5,2,1,38]),75);
+
+    var arr=[];
+    for(var i=0;i<10;i++){
+        arr.push(function(){
+            console.log(i,79)
+            });
+    }
+    console.log(arr,82);
+
+    arr.forEach(function(list){
+        list();
+    })
+
+var arr1=[1,2,4];
+function isArray1(obj){
+    if(typeof Array.isArray==="function"){
+        console.log(1);
+        return Array.isArray(obj); //浏览器支持则使用isArray()方法
+    }
+    else{//否则使用toString方法
+        console.log(2);
+        return Object.prototype.toString.call(obj)==="[object Array]"
+    }
+
+}
+console.log(isArray1(arr1),98);
+
+</script>
+</body>
+</html>
