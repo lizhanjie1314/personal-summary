@@ -16,10 +16,10 @@
      */
     function  senHandle(str,star,end) {
         //substring(start,stop) 包括start位置，不包括stop处
-        //1.senHandle(str,1) 邮箱，@符号 例如：15601361111@qq.com -->1**********@qq.com
+        // 1.senHandle(str,1) 邮箱，@符号 例如：15601361111@qq.com -->1**********@qq.com
         // 2.senHandle(str,3,7) 手机号 例如：15601361111 -->156****1111
         // 3.senHandle(str,4,str.length-4) 银行账户 例如：121912408010703 -->1219*******0703
-        // 4.senHandle(str,str.length-8,str.length-4)身份证号 例如130525201605056666
+        // 4.senHandle(str,str.length-8,str.length-4)身份证号 例如:130525201605056666 -->1305252016****6666
         var end=end;
         if(!end){end=str.indexOf('@');}
         var starStr=str.substring(0,star);
@@ -31,9 +31,6 @@
             return starStr+newMidStr+endStr
         }
     }
-    var str="130525201605056666";
-
-    console.log(senHandle(str,str.length-8,str.length-4))
 </script>
 </body>
 </html>
